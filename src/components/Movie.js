@@ -9,7 +9,7 @@ const Movie = (props) => {
     const { id } = useParams();
     const { push } = useHistory();
 
-    const { deleteMovie, toggleFavorites, addFavorites, removeFavorite }= props;
+    const { deleteMovie, addFavorite}= props;
     const movie = props.movies.find(movie=>movie.id===Number(id));
 
     const handleDeleteClick = () => {
@@ -18,8 +18,7 @@ const Movie = (props) => {
     }
 
     const handleAddFavoriteClick = () => {
-        addFavorite(movie.id);
-        push('/movies');
+        props.addFavorite(movie);
     }
     
     return(<div className="modal-page col">
@@ -68,4 +67,4 @@ const mapStateToProps = (state) => {
     }
 }
 
-export default connect(mapStateToProps, {deleteMovie})(Movie);
+export default connect(mapStateToProps, {deleteMovie, addFavorite})(Movie);
